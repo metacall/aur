@@ -12,6 +12,8 @@ optdepends=('dotnet-sdk-bin: C# support'
             'ruby: Ruby support' 
             'clang: C support' 
             'jre-openjdk-headless: JAVA support' 
+            'rustup: Rust support' 
+            'gnucobol: Cobol support' 
             'nodejs: NodeJS support' 
             'typescript: TypeScript support') # optional runtime deps
 provides=('metacall')
@@ -29,6 +31,7 @@ build() {
     METACALL_LOADER_PY="${METACALL_LOADER_PY:=off}"
     METACALL_LOADER_RB="${METACALL_LOADER_RB:=off}"
     METACALL_LOADER_TS="${METACALL_LOADER_TS:=off}"
+    METACALL_LOADER_RS="${METACALL_LOADER_RS:=off}"
     cmake -B build -S "${pkgname}" \
         -DCMAKE_BUILD_TYPE='Release' \
         -DCMAKE_INSTALL_PREFIX='/usr' \
@@ -40,6 +43,7 @@ build() {
         -DOPTION_BUILD_LOADERS_PY=$METACALL_LOADER_PY \
         -DOPTION_BUILD_LOADERS_RB=$METACALL_LOADER_RB \
         -DOPTION_BUILD_LOADERS_TS=$METACALL_LOADER_TS \
+        -DOPTION_BUILD_LOADERS_RS=$METACALL_LOADER_RS \
         -DOPTION_BUILD_LOADERS_MOCK=off \
         -Wno-dev
     cmake --build build
